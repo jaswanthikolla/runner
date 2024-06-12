@@ -505,9 +505,8 @@ namespace GitHub.Runner.Listener.Configuration
                     Trace.Info("I am here -- JAS 0------------");
                     if (string.IsNullOrEmpty(settings.GitHubUrl))
                     {
-                        Trace.Info("I am here -- JAS 1 ------------");
-                        var credProvider = GetCredentialProvider(command, settings.ServerUrl);
-                        Trace.Info("I am here -- JAS 1 ------------");
+                        Trace.Info("I am here -- JAS 2 ------------");
+                        Trace.Info("I am here -- JAS 3 ------------");
                         creds = credentialManager.LoadCredentials();
                         Trace.Info("legacy vss cred retrieved");
                     }
