@@ -505,7 +505,7 @@ namespace GitHub.Runner.Listener.Configuration
                     if (string.IsNullOrEmpty(settings.GitHubUrl))
                     {
                         var credProvider = GetCredentialProvider(command, settings.ServerUrl);
-                        creds = credProvider.GetVssCredentials(HostContext);
+                        creds = credMgr.LoadCredentials();
                         Trace.Info("legacy vss cred retrieved");
                     }
                     else
