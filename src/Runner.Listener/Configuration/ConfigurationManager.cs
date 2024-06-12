@@ -525,6 +525,8 @@ namespace GitHub.Runner.Listener.Configuration
                     Trace.Info("Agent Name {0} ", settings.AgentName);
                     var agents = await _runnerServer.GetAgentsAsync(settings.AgentName);
                     Trace.Info("Returns {0} agents", agents.Count);
+                    await _runnerServer.DeleteAgentAsync(settings.AgentId);
+                    _term.WriteSuccessMessage("Runner removed successfully");
                     TaskAgent agent = agents.FirstOrDefault();
                     if (agent == null)
                     {
