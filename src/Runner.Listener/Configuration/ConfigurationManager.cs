@@ -497,15 +497,20 @@ namespace GitHub.Runner.Listener.Configuration
                 bool hasCredentials = _store.HasCredentials();
                 if (isConfigured && hasCredentials)
                 {
-                    RunnerSettings settings = _store.GetSettings();
+                    RunnerSettings s
+                    ettings = _store.GetSettings();
                     var credentialManager = HostContext.GetService<ICredentialManager>();
 
                     // Get the credentials
                     VssCredentials creds = null;
+                    Trace.Info("I am here -- JAS 0 ------------");
                     if (string.IsNullOrEmpty(settings.GitHubUrl))
                     {
+                        Trace.Info("I am here -- JAS 1 ------------");
                         var credProvider = GetCredentialProvider(command, settings.ServerUrl);
+                        Trace.Info("I am here -- JAS 2 ------------");
                         creds = credentialManager.LoadCredentials();
+                        Trace.Info("I am here -- JAS 3 ------------");
                         Trace.Info("legacy vss cred retrieved");
                     }
                     else
