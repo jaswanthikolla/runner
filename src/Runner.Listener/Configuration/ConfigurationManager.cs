@@ -506,7 +506,6 @@ namespace GitHub.Runner.Listener.Configuration
                     if (string.IsNullOrEmpty(settings.GitHubUrl))
                     {
                         Trace.Info("I am here -- JAS 2 ------------");
-                        var credProvider = GetCredentialProvider(command, settings.ServerUrl);
                         Trace.Info("I am here -- JAS 3 ------------");
                         creds = credentialManager.LoadCredentials();
                         Trace.Info("legacy vss cred retrieved");
@@ -520,10 +519,12 @@ namespace GitHub.Runner.Listener.Configuration
                     }
 
                     // Determine the service deployment type based on connection data. (Hosted/OnPremises)
+                    Trace.Info("Connecting to the Runner Server...");
                     await _runnerServer.ConnectAsync(new Uri(settings.ServerUrl), creds);
-
+                    Trace.Info("VssConnection created");
+                    Trace.Info("Agent Name {0} ", settings.AgentName);
                     var agents = await _runnerServer.GetAgentsAsync(settings.AgentName);
-                    Trace.Verbose("Returns {0} agents", agents.Count);
+                    Trace.Info("Returns {0} agents", agents.Count);
                     TaskAgent agent = agents.FirstOrDefault();
                     if (agent == null)
                     {
